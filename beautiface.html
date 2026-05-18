@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beautiface — Makeup Artistry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fdf8f5;
+  --blush:#f2d9d0;
+  --rose:#d4857a;
+  --deep-rose:#b5605a;
+  --muted:#a07a74;
+  --dark:#2c1f1c;
+  --gold:#c9a96e;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--blush)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.4rem 5%;
+  background:rgba(253,248,245,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,133,122,0.12);
+  transition:padding 0.3s;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;font-weight:400;
+  color:var(--dark);text-decoration:none;
+  letter-spacing:0.05em;
+}
+.nav-logo span{color:var(--rose)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{
+  font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;transition:color 0.3s;
+}
+.nav-links a:hover{color:var(--rose)}
+.nav-book{
+  background:var(--rose);color:var(--white)!important;
+  padding:0.6rem 1.5rem;border-radius:50px;
+  transition:background 0.3s!important;
+}
+.nav-book:hover{background:var(--deep-rose)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;border:none;background:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--dark);transition:0.3s;border-radius:2px}
+.mobile-menu{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--cream);z-index:999;
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;
+  color:var(--dark);text-decoration:none;transition:color 0.3s;
+}
+.mobile-menu a:hover{color:var(--rose)}
+.mobile-close{
+  position:absolute;top:1.5rem;right:5%;
+  background:none;border:none;font-size:2rem;cursor:pointer;color:var(--dark);
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  padding-top:70px;
+  position:relative;overflow:hidden;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5% 5% 5% 7%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--blush);color:var(--deep-rose);
+  font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:0.5rem 1.2rem;border-radius:50px;
+  margin-bottom:2rem;width:fit-content;
+  animation:fadeUp 0.8s ease both;
+}
+.hero-badge::before{content:'★';font-size:0.65rem}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,5.5vw,5.5rem);
+  font-weight:400;line-height:1.05;
+  color:var(--dark);
+  animation:fadeUp 0.8s 0.1s ease both;
+}
+.hero-title em{font-style:italic;color:var(--rose)}
+.hero-desc{
+  margin-top:1.5rem;
+  font-size:0.95rem;font-weight:300;line-height:1.9;
+  color:var(--muted);max-width:400px;
+  animation:fadeUp 0.8s 0.2s ease both;
+}
+.hero-stars{
+  margin-top:1.8rem;display:flex;align-items:center;gap:0.8rem;
+  animation:fadeUp 0.8s 0.3s ease both;
+}
+.stars{color:var(--gold);font-size:1rem;letter-spacing:2px}
+.stars-text{font-size:0.78rem;color:var(--muted)}
+.stars-text strong{color:var(--dark)}
+.hero-cta{
+  margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp 0.8s 0.4s ease both;
+}
+.btn-primary{
+  background:var(--rose);color:var(--white);
+  padding:0.9rem 2.5rem;border-radius:50px;
+  font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;
+  text-decoration:none;transition:background 0.3s,transform 0.2s;
+  display:inline-block;
+}
+.btn-primary:hover{background:var(--deep-rose);transform:translateY(-2px)}
+.btn-outline{
+  border:1.5px solid var(--blush);color:var(--muted);
+  padding:0.9rem 2.5rem;border-radius:50px;
+  font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.3s;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--rose);color:var(--rose)}
+.hero-right{
+  position:relative;overflow:hidden;
+  animation:fadeIn 1.2s 0.2s ease both;
+}
+.hero-img{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#f2d9d0 0%,#e8b8a8 40%,#d4957a 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.hero-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,var(--cream) 0%,transparent 30%);
+}
+.hero-emoji{font-size:clamp(8rem,15vw,16rem);opacity:0.18;user-select:none;line-height:1}
+.hero-floating-card{
+  position:absolute;bottom:8%;left:5%;
+  background:var(--white);border-radius:20px;
+  padding:1.2rem 1.8rem;
+  box-shadow:0 20px 60px rgba(44,31,28,0.1);
+  z-index:2;
+  animation:float 3s ease-in-out infinite;
+}
+.float-card-title{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+.float-card-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;color:var(--dark)}
+.float-card-sub{font-size:0.7rem;color:var(--muted)}
+
+/* MARQUEE */
+.marquee{
+  background:var(--dark);padding:0.9rem 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.marquee-track{
+  display:inline-flex;white-space:nowrap;
+  animation:marquee 25s linear infinite;
+}
+.marquee-item{
+  font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:rgba(242,217,208,0.7);padding:0 2.5rem;
+}
+.marquee-dot{color:var(--gold);margin:0 0.5rem}
+
+/* SECTIONS */
+.section{padding:6rem 7%}
+.section-label{
+  font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:1rem;display:block;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3.5rem);
+  font-weight:400;line-height:1.15;color:var(--dark);
+}
+.section-title em{font-style:italic;color:var(--rose)}
+
+/* SERVICES */
+.services{background:var(--white)}
+.services-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:3.5rem;flex-wrap:wrap;gap:1.5rem;
+}
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;
+}
+.service-card{
+  border:1px solid var(--blush);border-radius:24px;
+  padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  background:var(--white);
+}
+.service-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 24px 60px rgba(212,133,122,0.15);
+  border-color:var(--rose);
+}
+.service-icon{
+  width:52px;height:52px;border-radius:16px;
+  background:var(--blush);display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:1.5rem;
+}
+.service-name{
+  font-family:'Playfair Display',serif;font-size:1.25rem;
+  font-weight:400;color:var(--dark);margin-bottom:0.7rem;
+}
+.service-desc{
+  font-size:0.85rem;font-weight:300;line-height:1.8;color:var(--muted);
+  margin-bottom:1.5rem;
+}
+.service-tag{
+  display:inline-block;
+  background:var(--blush);color:var(--deep-rose);
+  font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.4rem 1rem;border-radius:50px;
+}
+
+/* REVIEWS */
+.reviews{background:var(--cream)}
+.reviews-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3.5rem;
+}
+.review-card{
+  background:var(--white);border-radius:24px;
+  padding:2rem;border:1px solid var(--blush);
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+.review-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(212,133,122,0.12);
+}
+.review-stars{color:var(--gold);font-size:0.85rem;letter-spacing:3px;margin-bottom:1rem}
+.review-text{
+  font-size:0.9rem;font-weight:300;line-height:1.8;
+  color:var(--dark);margin-bottom:1.5rem;
+  font-style:italic;
+}
+.review-author{display:flex;align-items:center;gap:0.8rem}
+.review-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blush),var(--rose));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;
+}
+.review-name{font-size:0.82rem;font-weight:400;color:var(--dark)}
+.review-date{font-size:0.72rem;color:var(--muted)}
+
+/* VIP STRIP */
+.vip-strip{
+  background:linear-gradient(135deg,var(--dark) 0%,#3d2520 100%);
+  padding:5rem 7%;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4rem;align-items:center;
+}
+.vip-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,3.5vw,3.5rem);
+  font-weight:400;line-height:1.15;color:var(--white);
+}
+.vip-title em{font-style:italic;color:var(--blush)}
+.vip-desc{
+  margin-top:1rem;font-size:0.9rem;font-weight:300;
+  line-height:1.9;color:rgba(242,217,208,0.7);
+}
+.vip-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+.vip-stat{
+  border-left:2px solid rgba(242,217,208,0.2);
+  padding-left:1.5rem;
+}
+.vip-num{
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;font-weight:400;color:var(--gold);line-height:1;
+}
+.vip-label{
+  font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(242,217,208,0.6);margin-top:0.4rem;
+}
+
+/* BOOKING */
+.booking{background:var(--white);padding:6rem 7%}
+.booking-inner{
+  max-width:600px;margin:0 auto;text-align:center;
+}
+.booking-inner .section-label,.booking-inner .section-title{text-align:center}
+.booking-inner .section-title{margin-bottom:1rem}
+.booking-desc{
+  font-size:0.9rem;font-weight:300;line-height:1.9;
+  color:var(--muted);margin-bottom:2.5rem;
+}
+.booking-form{display:flex;flex-direction:column;gap:1rem;text-align:left}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.5rem}
+.form-label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.form-input,.form-select,.form-textarea{
+  border:1.5px solid var(--blush);border-radius:12px;
+  padding:0.85rem 1.2rem;font-family:'DM Sans',sans-serif;
+  font-size:0.88rem;color:var(--dark);background:var(--cream);
+  outline:none;transition:border-color 0.3s;width:100%;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--rose)}
+.form-textarea{resize:none;height:100px}
+.form-submit{
+  background:var(--rose);color:var(--white);
+  border:none;border-radius:50px;padding:1rem;
+  font-family:'DM Sans',sans-serif;font-size:0.78rem;
+  letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;
+  transition:background 0.3s,transform 0.2s;margin-top:0.5rem;
+}
+.form-submit:hover{background:var(--deep-rose);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{
+  background:var(--dark);padding:4rem 7% 2rem;
+}
+.footer-top{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-brand .nav-logo{color:var(--white);display:block;margin-bottom:1rem}
+.footer-brand p{font-size:0.85rem;font-weight:300;line-height:1.8;color:rgba(242,217,208,0.6);max-width:260px}
+.footer-socials{display:flex;gap:0.8rem;margin-top:1.5rem}
+.social-link{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(242,217,208,0.2);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(242,217,208,0.6);font-size:0.85rem;text-decoration:none;
+  transition:all 0.3s;
+}
+.social-link:hover{border-color:var(--rose);color:var(--rose)}
+.footer-col h4{font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(242,217,208,0.4);margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.7rem}
+.footer-col ul li a{font-size:0.85rem;font-weight:300;color:rgba(242,217,208,0.7);text-decoration:none;transition:color 0.3s}
+.footer-col ul li a:hover{color:var(--rose)}
+.footer-bottom{
+  border-top:1px solid rgba(242,217,208,0.1);
+  padding-top:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.footer-copy{font-size:0.75rem;color:rgba(242,217,208,0.4)}
+.footer-vip{
+  display:flex;align-items:center;gap:0.5rem;
+  font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1.2rem 5%}
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:7rem 6% 3rem}
+  .hero-right{height:320px}
+  .hero-floating-card{left:5%;bottom:5%}
+  .services-grid{grid-template-columns:1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .vip-strip{grid-template-columns:1fr;gap:2.5rem}
+  .form-row{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:2rem}
+  .section{padding:4rem 6%}
+  .vip-strip{padding:4rem 6%}
+}
+@media(max-width:600px){
+  .hero-title{font-size:2.5rem}
+  .hero-cta{flex-direction:column}
+  .btn-primary,.btn-outline{text-align:center}
+  .services-header{flex-direction:column;align-items:flex-start}
+  .vip-stats{grid-template-columns:1fr 1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">beauti<span>face</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#booking" class="nav-book">Book Now</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#booking" onclick="toggleMenu()" style="color:var(--rose)">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">VIP Makeup Artistry</div>
+    <h1 class="hero-title">
+      Where Beauty<br>Meets <em>Perfection</em>
+    </h1>
+    <p class="hero-desc">
+      Trusted by hundreds of clients, beautiface delivers flawless, long-lasting makeup for every occasion. Every look is crafted with precision, passion, and luxury.
+    </p>
+    <div class="hero-stars">
+      <span class="stars">★★★★★</span>
+      <span class="stars-text"><strong>5.0</strong> · 200+ glowing reviews</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#booking" class="btn-primary">Book Your Look</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img">
+      <div class="hero-emoji">💄</div>
+    </div>
+    <div class="hero-floating-card">
+      <div class="float-card-title">Satisfaction Rate</div>
+      <div class="float-card-val">100%</div>
+      <div class="float-card-sub">From every single client ✨</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">Bridal Makeup <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Editorial Looks <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Night Glam <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Natural Glow <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">VIP Experience <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Airbrush Finish <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Flawless Results <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Bridal Makeup <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Editorial Looks <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Night Glam <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Natural Glow <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">VIP Experience <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Airbrush Finish <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Flawless Results <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services section" id="services">
+  <div class="services-header reveal">
+    <div>
+      <span class="section-label">What We Offer</span>
+      <h2 class="section-title">Every Look,<br><em>Perfected</em></h2>
+    </div>
+    <a href="#booking" class="btn-primary">Book a Service</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">👰</div>
+      <div class="service-name">Bridal Makeup</div>
+      <p class="service-desc">Your most important day deserves the most flawless look. Long-lasting, luminous, and perfectly tailored to your vision.</p>
+      <span class="service-tag">Most Popular</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">✨</div>
+      <div class="service-name">Glam & Evening</div>
+      <p class="service-desc">From gala nights to celebrations, we craft bold, sophisticated looks that command attention and last all night.</p>
+      <span class="service-tag">High Demand</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🌸</div>
+      <div class="service-name">Natural Glow</div>
+      <p class="service-desc">Effortless, fresh-faced beauty that enhances your natural features. Soft, dewy, and absolutely radiant.</p>
+      <span class="service-tag">Client Favorite</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">📸</div>
+      <div class="service-name">Editorial & Photoshoot</div>
+      <p class="service-desc">Camera-ready looks crafted for photography, film, and content creation. Precision and artistry in every detail.</p>
+      <span class="service-tag">Professional</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🎭</div>
+      <div class="service-name">Special Occasions</div>
+      <p class="service-desc">Graduations, engagements, parties — whatever the occasion, we ensure you look and feel extraordinary.</p>
+      <span class="service-tag">All Occasions</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">👑</div>
+      <div class="service-name">VIP Home Service</div>
+      <p class="service-desc">Luxury comes to you. Our VIP at-home experience brings the full artistry studio directly to your doorstep.</p>
+      <span class="service-tag">VIP Only</span>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews section" id="reviews">
+  <div class="reveal" style="text-align:center;margin-bottom:3rem">
+    <span class="section-label" style="display:block;text-align:center">Client Love</span>
+    <h2 class="section-title">Tried, Tested &<br><em>Adored</em></h2>
+    <p style="margin-top:1rem;font-size:0.88rem;font-weight:300;color:var(--muted)">Real reviews from real clients — every single star earned.</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I've never felt more beautiful on my wedding day. The makeup lasted 12 hours without touching up. Absolute perfection!"</p>
+      <div class="review-author">
+        <div class="review-avatar">👰</div>
+        <div>
+          <div class="review-name">Sara Al-Rashid</div>
+          <div class="review-date">Bridal Makeup · March 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Booked for my engagement photos and the results were breathtaking. Every photo looked like it came from a magazine."</p>
+      <div class="review-author">
+        <div class="review-avatar">💍</div>
+        <div>
+          <div class="review-name">Lina Hassan</div>
+          <div class="review-date">Editorial Look · January 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Came for a natural glow look and left feeling like a completely transformed version of myself. So talented and professional!"</p>
+      <div class="review-author">
+        <div class="review-avatar">🌸</div>
+        <div>
+          <div class="review-name">Nour Khalid</div>
+          <div class="review-date">Natural Glow · February 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The VIP home service is a game-changer. Such a luxurious experience — the attention to detail is unmatched. 100% recommend!"</p>
+      <div class="review-author">
+        <div class="review-avatar">👑</div>
+        <div>
+          <div class="review-name">Dina Mohammed</div>
+          <div class="review-date">VIP Home Service · April 2025</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Booked for a gala night and got so many compliments. The glam look was bold yet sophisticated — exactly what I wanted!"</p>
+      <div class="review-author">
+        <div class="review-avatar">✨</div>
+        <div>
+          <div class="review-name">Rima Farhat</div>
+          <div class="review-date">Glam & Evening · December 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"My graduation look was flawless. She understood exactly what I wanted and elevated it beyond my expectations. Will always come back!"</p>
+      <div class="review-author">
+        <div class="review-avatar">🎓</div>
+        <div>
+          <div class="review-name">Maya Saeed</div>
+          <div class="review-date">Special Occasion · May 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIP STRIP -->
+<section class="vip-strip" id="about">
+  <div class="reveal">
+    <span class="section-label" style="color:var(--blush)">Why beautiface</span>
+    <h2 class="vip-title">Quality You Can<br><em>See & Feel</em></h2>
+    <p class="vip-desc">beautiface isn't just makeup — it's an experience. Every client leaves not just looking beautiful, but feeling confident, seen, and cared for. This is luxury artistry at its finest.</p>
+    <a href="#booking" class="btn-primary" style="margin-top:2rem;display:inline-block">Reserve Your Session</a>
+  </div>
+  <div class="vip-stats reveal">
+    <div class="vip-stat">
+      <div class="vip-num">200+</div>
+      <div class="vip-label">Happy Clients</div>
+    </div>
+    <div class="vip-stat">
+      <div class="vip-num">5.0</div>
+      <div class="vip-label">Average Rating</div>
+    </div>
+    <div class="vip-stat">
+      <div class="vip-num">100%</div>
+      <div class="vip-label">Satisfaction Rate</div>
+    </div>
+    <div class="vip-stat">
+      <div class="vip-num">3+</div>
+      <div class="vip-label">Years of Artistry</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <span class="section-label">Reserve Your Look</span>
+    <h2 class="section-title">Book Your<br><em>Session</em></h2>
+    <p class="booking-desc">Ready to look and feel your absolute best? Fill in the form and we'll get back to you within 24 hours to confirm your appointment.</p>
+    <form class="booking-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-input" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="+1 000 000 0000" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Service</label>
+        <select class="form-select" required>
+          <option value="">Select a service...</option>
+          <option>Bridal Makeup</option>
+          <option>Glam & Evening</option>
+          <option>Natural Glow</option>
+          <option>Editorial & Photoshoot</option>
+          <option>Special Occasion</option>
+          <option>VIP Home Service</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Preferred Date</label>
+        <input type="date" class="form-input" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Any Notes?</label>
+        <textarea class="form-textarea" placeholder="Tell us about your vision, inspiration, or any special requests..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Booking Request ✨</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">beauti<span>face</span></a>
+      <p>Luxury makeup artistry trusted by hundreds of clients. Every look is a masterpiece crafted with love, skill, and precision.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-link">📸</a>
+        <a href="#" class="social-link">💬</a>
+        <a href="#" class="social-link">🎵</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Bridal Makeup</a></li>
+        <li><a href="#services">Glam & Evening</a></li>
+        <li><a href="#services">Natural Glow</a></li>
+        <li><a href="#services">Editorial</a></li>
+        <li><a href="#services">VIP Home Service</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#booking">Book a Session</a></li>
+        <li><a href="#reviews">Client Reviews</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 beautiface. All rights reserved.</span>
+    <span class="footer-vip">⭐ VIP Makeup Artistry</span>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Form submit
+function handleSubmit(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Request Sent! We\'ll contact you soon.';
+  btn.style.background = '#7ab08a';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
