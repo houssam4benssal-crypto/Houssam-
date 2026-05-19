@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lookin Good Restaurant & Lounge | Denver</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5EDD6;
+    --warm-white: #FAF6EE;
+    --gold: #C9972B;
+    --gold-light: #E5B84A;
+    --deep-brown: #2C1A0E;
+    --medium-brown: #5C3A1E;
+    --rust: #B94E2A;
+    --olive: #6B7C45;
+    --olive-light: #8FA05C;
+    --charcoal: #3A3228;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--deep-brown);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 48px;
+    background: rgba(44, 26, 14, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(201,151,43,0.3);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 900;
+    color: var(--gold);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+  .nav-logo span { display: block; font-size: 0.65rem; font-weight: 300; color: var(--cream); letter-spacing: 4px; text-transform: uppercase; font-family: 'Lato', sans-serif; }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav ul li a {
+    color: var(--cream); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700;
+    transition: color 0.3s;
+    position: relative;
+  }
+  nav ul li a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s;
+  }
+  nav ul li a:hover { color: var(--gold); }
+  nav ul li a:hover::after { width: 100%; }
+  .nav-cta {
+    background: var(--gold); color: var(--deep-brown) !important;
+    padding: 10px 24px; font-weight: 700 !important;
+    transition: background 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--deep-brown) !important; }
+  .nav-cta::after { display: none !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 24px 60px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,151,43,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(185,78,42,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 40% 60% at 80% 20%, rgba(107,124,69,0.08) 0%, transparent 50%);
+    background-color: var(--deep-brown);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,151,43,0.15); border: 1px solid rgba(201,151,43,0.4);
+    padding: 8px 20px; border-radius: 30px; margin-bottom: 28px;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light);
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge .star { color: var(--gold); }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 9vw, 7rem);
+    font-weight: 900; line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--gold);
+    display: block;
+  }
+  .hero-sub {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--olive-light); margin-bottom: 32px;
+    font-weight: 300;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-desc {
+    font-size: 1.1rem; line-height: 1.7; color: rgba(245,237,214,0.75);
+    max-width: 520px; margin: 0 auto 48px;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .btn-primary {
+    background: var(--gold); color: var(--deep-brown);
+    padding: 16px 40px; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s; display: inline-block;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(245,237,214,0.4); color: var(--cream);
+    padding: 16px 40px; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    text-decoration: none; transition: all 0.3s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 48px; justify-content: center; margin-top: 72px;
+    animation: fadeUp 0.8s 0.75s ease both;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .stat-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,237,214,0.5); margin-top: 4px; }
+
+  .scroll-line {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    animation: fadeUp 1s 1s ease both;
+    cursor: pointer;
+  }
+  .scroll-line span { font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,237,214,0.4); }
+  .scroll-arrow {
+    width: 1px; height: 50px; background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 48px; }
+
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.1;
+    color: var(--cream); margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin: 24px 0;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    background: linear-gradient(135deg, var(--medium-brown), var(--charcoal));
+    border: 1px solid rgba(201,151,43,0.3);
+    padding: 40px; text-align: center;
+    min-height: 360px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 24px;
+    position: relative; overflow: hidden;
+  }
+  .about-img-frame::before {
+    content: ''; position: absolute;
+    top: 12px; left: 12px; right: 12px; bottom: 12px;
+    border: 1px solid rgba(201,151,43,0.15);
+    pointer-events: none;
+  }
+  .about-icon { font-size: 5rem; }
+  .about-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-style: italic;
+    color: var(--gold-light); line-height: 1.5; text-align: center;
+  }
+  .about-accent {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: var(--rust); opacity: 0.15;
+    border-radius: 50%;
+  }
+  .about-text p {
+    color: rgba(245,237,214,0.75); line-height: 1.8; margin-bottom: 20px;
+    font-size: 1.05rem;
+  }
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px;
+  }
+  .feature-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px;
+    background: rgba(201,151,43,0.08); border: 1px solid rgba(201,151,43,0.2);
+  }
+  .feature-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .feature-text { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; }
+
+  /* ── MENU HIGHLIGHT ── */
+  .menu-section {
+    background: var(--charcoal);
+    position: relative; overflow: hidden;
+  }
+  .menu-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,151,43,0.06) 0%, transparent 60%);
+  }
+  .menu-inner { max-width: 1200px; margin: 0 auto; position: relative; }
+  .menu-header { margin-bottom: 60px; }
+
+  .menu-tabs {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 48px;
+  }
+  .tab-btn {
+    padding: 10px 24px; background: transparent;
+    border: 1px solid rgba(201,151,43,0.25); color: rgba(245,237,214,0.6);
+    font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; cursor: pointer; transition: all 0.3s;
+    font-family: 'Lato', sans-serif;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--gold); color: var(--deep-brown);
+    border-color: var(--gold);
+  }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px;
+  }
+  .menu-card {
+    background: rgba(44,26,14,0.6); padding: 28px;
+    border: 1px solid rgba(201,151,43,0.12);
+    transition: all 0.3s; position: relative; overflow: hidden;
+    display: none;
+  }
+  .menu-card.active { display: block; }
+  .menu-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 0; background: var(--gold);
+    transition: height 0.3s;
+  }
+  .menu-card:hover { background: rgba(44,26,14,0.9); border-color: rgba(201,151,43,0.3); }
+  .menu-card:hover::before { height: 100%; }
+  .card-emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700; color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .card-desc { font-size: 0.85rem; color: rgba(245,237,214,0.55); line-height: 1.6; margin-bottom: 16px; }
+  .card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold); font-weight: 700;
+  }
+  .card-popular {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--rust); color: #fff;
+    font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 4px 10px; font-weight: 700;
+  }
+
+  /* ── HOURS ── */
+  .hours-section {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+  .hours-table { border-collapse: collapse; width: 100%; margin-top: 32px; }
+  .hours-table tr { border-bottom: 1px solid rgba(201,151,43,0.12); }
+  .hours-table tr:last-child { border-bottom: none; }
+  .hours-table td { padding: 16px 0; font-size: 0.95rem; }
+  .hours-table td:first-child { color: rgba(245,237,214,0.6); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem; }
+  .hours-table td:last-child { text-align: right; color: var(--cream); }
+  .hours-table .closed { color: var(--rust) !important; }
+  .today { background: rgba(201,151,43,0.08); }
+  .today td:first-child { color: var(--gold) !important; }
+
+  .contact-info { margin-top: 32px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 24px; padding: 20px;
+    background: rgba(201,151,43,0.06); border: 1px solid rgba(201,151,43,0.15);
+  }
+  .contact-item-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+  .contact-item-text { }
+  .contact-item-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; font-weight: 700; }
+  .contact-item-value { color: var(--cream); font-size: 0.95rem; line-height: 1.5; }
+  .contact-item-value a { color: var(--cream); text-decoration: none; }
+  .contact-item-value a:hover { color: var(--gold); }
+
+  /* ── REVIEWS ── */
+  .reviews-section {
+    background: linear-gradient(to bottom, var(--charcoal), var(--deep-brown));
+    position: relative;
+  }
+  .reviews-inner { max-width: 1200px; margin: 0 auto; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px;
+  }
+  .review-card {
+    background: rgba(44,26,14,0.7); padding: 32px;
+    border: 1px solid rgba(201,151,43,0.15);
+    position: relative;
+  }
+  .review-card::before {
+    content: '"'; position: absolute; top: 16px; right: 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem; color: rgba(201,151,43,0.1); line-height: 1;
+  }
+  .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 16px; }
+  .review-text { font-size: 0.95rem; line-height: 1.7; color: rgba(245,237,214,0.8); margin-bottom: 20px; font-style: italic; }
+  .review-author { font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; }
+  .review-date { font-size: 0.75rem; color: rgba(245,237,214,0.4); margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(0,0,0,0.4); border-top: 1px solid rgba(201,151,43,0.2);
+    padding: 48px; text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900; color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .footer-tagline { color: rgba(245,237,214,0.4); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 32px; }
+  .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 32px; }
+  .footer-links a { color: rgba(245,237,214,0.5); text-decoration: none; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { color: rgba(245,237,214,0.25); font-size: 0.75rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 14px 20px; }
+    nav ul { display: none; }
+    section { padding: 70px 20px; }
+    .about { grid-template-columns: 1fr; gap: 40px; }
+    .hours-section { grid-template-columns: 1fr; gap: 48px; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    Lookin Good
+    <span>Restaurant & Lounge · Denver</span>
+  </div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="tel:+1" class="nav-cta">Call Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="star">★★★★½</span>
+      4.5 · Over 2,300 Reviews
+    </div>
+    <h1>Lookin <em>Good</em></h1>
+    <p class="hero-sub">Restaurant & Lounge · Denver, CO</p>
+    <p class="hero-desc">
+      Where Greek flavors meet American comfort. Breakfast, brunch, and hearty classics served with heart — right here in Denver.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">View Menu</a>
+      <a href="#hours" class="btn-outline">Find Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4.5★</div>
+        <div class="stat-label">Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2,342</div>
+        <div class="stat-label">Reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$10–20</div>
+        <div class="stat-label">Per Person</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-line" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about">
+    <div class="about-visual">
+      <div class="about-img-frame">
+        <div class="about-icon">🍳</div>
+        <p class="about-quote">"Where every morning feels like a celebration"</p>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+    <div class="about-text">
+      <span class="section-label">Our Story</span>
+      <h2 class="section-title">More Than a <em>Meal</em></h2>
+      <div class="divider"></div>
+      <p>
+        Lookin Good Restaurant and Lounge has been a beloved Denver institution — a place where neighbors become regulars and strangers become friends over plates of comfort food done right.
+      </p>
+      <p>
+        From our famous Mad Greek Waffles to golden Saganaki, Country Chicken Fried Steak to hearty Steak and Eggs — every dish is made with love and served with a smile.
+      </p>
+      <div class="about-features">
+        <div class="feature-item">
+          <span class="feature-icon">🧇</span>
+          <span class="feature-text">All-Day Breakfast</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🫒</span>
+          <span class="feature-text">Greek Specialties</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">♿</span>
+          <span class="feature-text">Wheelchair Accessible</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🍹</span>
+          <span class="feature-text">Full Lounge Bar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <span class="section-label">What We Serve</span>
+      <h2 class="section-title">Our <em>Menu</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterMenu('breakfast')">🌅 Breakfast</button>
+      <button class="tab-btn" onclick="filterMenu('greek')">🫒 Greek</button>
+      <button class="tab-btn" onclick="filterMenu('burgers')">🍔 Burgers</button>
+      <button class="tab-btn" onclick="filterMenu('drinks')">🍹 Drinks</button>
+    </div>
+    <div class="menu-grid" id="menuGrid">
+
+      <!-- BREAKFAST -->
+      <div class="menu-card active" data-cat="breakfast">
+        <span class="card-emoji">🧇</span>
+        <div class="card-popular">Popular</div>
+        <div class="card-name">Mad Greek Waffle</div>
+        <div class="card-desc">Fluffy Belgian-style waffle with a Mediterranean twist. Served with fresh fruit and syrup.</div>
+        <div class="card-price">$14</div>
+      </div>
+      <div class="menu-card active" data-cat="breakfast">
+        <span class="card-emoji">🥩</span>
+        <div class="card-name">Steak and Eggs</div>
+        <div class="card-desc">Grilled sirloin with two eggs any style, toast, and hash browns. The Denver classic.</div>
+        <div class="card-price">$18</div>
+      </div>
+      <div class="menu-card active" data-cat="breakfast">
+        <span class="card-emoji">🍗</span>
+        <div class="card-name">Country Chicken Fried Steak</div>
+        <div class="card-desc">Crispy breaded steak smothered in house-made country gravy with eggs and biscuit.</div>
+        <div class="card-price">$16</div>
+      </div>
+
+      <!-- GREEK -->
+      <div class="menu-card" data-cat="greek">
+        <span class="card-emoji">🥗</span>
+        <div class="card-popular">Popular</div>
+        <div class="card-name">Greek Salad with Gyro Meat</div>
+        <div class="card-desc">Crisp romaine, feta, olives, tomatoes, cucumber, and red onion topped with seasoned gyro slices.</div>
+        <div class="card-price">$15</div>
+      </div>
+      <div class="menu-card" data-cat="greek">
+        <span class="card-emoji">🧀</span>
+        <div class="card-name">Saganaki</div>
+        <div class="card-desc">Flamed Greek cheese, golden and crispy outside, gooey within. A showstopper starter.</div>
+        <div class="card-price">$11</div>
+      </div>
+      <div class="menu-card" data-cat="greek">
+        <span class="card-emoji">🌀</span>
+        <div class="card-name">Mad Greek Volcano</div>
+        <div class="card-desc">Add gyros — our signature volcano dish loaded with spiced meat and all the fixings.</div>
+        <div class="card-price">$17</div>
+      </div>
+      <div class="menu-card" data-cat="greek">
+        <span class="card-emoji">🥗</span>
+        <div class="card-name">Greek Salad with Chicken</div>
+        <div class="card-desc">Classic Greek salad topped with grilled chicken breast, herbs, and house dressing.</div>
+        <div class="card-price">$14</div>
+      </div>
+
+      <!-- BURGERS -->
+      <div class="menu-card" data-cat="burgers">
+        <span class="card-emoji">🍔</span>
+        <div class="card-name">Mushroom Swiss Burger</div>
+        <div class="card-desc">Half-pound beef patty, sautéed mushrooms, Swiss cheese, and crispy steak fries.</div>
+        <div class="card-price">$16</div>
+      </div>
+      <div class="menu-card" data-cat="burgers">
+        <span class="card-emoji">🥙</span>
+        <div class="card-popular">Popular</div>
+        <div class="card-name">BLT</div>
+        <div class="card-desc">Thick-cut bacon, crisp lettuce, fresh tomato on toasted sourdough with mayo.</div>
+        <div class="card-price">$12</div>
+      </div>
+      <div class="menu-card" data-cat="burgers">
+        <span class="card-emoji">🌮</span>
+        <div class="card-name">Chicken Quesadillas</div>
+        <div class="card-desc">Grilled chicken, peppers, onions, and melted cheese in a toasted flour tortilla. Served with salsa and sour cream.</div>
+        <div class="card-price">$13</div>
+      </div>
+      <div class="menu-card" data-cat="burgers">
+        <span class="card-emoji">🥩</span>
+        <div class="card-name">Chicken & Steak Fajitas for Two</div>
+        <div class="card-desc">Sizzling platter of marinated chicken and steak with peppers, onions, and all the fixings.</div>
+        <div class="card-price">$28</div>
+      </div>
+
+      <!-- DRINKS -->
+      <div class="menu-card" data-cat="drinks">
+        <span class="card-emoji">🍹</span>
+        <div class="card-name">Margarita</div>
+        <div class="card-desc">House margarita, classic lime or flavored. On the rocks or frozen. Salt or no salt.</div>
+        <div class="card-price">$10</div>
+      </div>
+      <div class="menu-card" data-cat="drinks">
+        <span class="card-emoji">☕</span>
+        <div class="card-name">Fresh Brewed Coffee</div>
+        <div class="card-desc">Bottomless hot coffee to start your morning right. Always fresh, always warm.</div>
+        <div class="card-price">$3</div>
+      </div>
+      <div class="menu-card" data-cat="drinks">
+        <span class="card-emoji">🥤</span>
+        <div class="card-name">Fresh Squeezed OJ</div>
+        <div class="card-desc">Pure, freshly squeezed orange juice — the perfect breakfast companion.</div>
+        <div class="card-price">$5</div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="https://lookingoodrestaurant.com" target="_blank" class="btn-outline">View Full Menu Online</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS & CONTACT -->
+<section id="hours">
+  <div class="hours-section">
+    <div>
+      <span class="section-label">We're Open</span>
+      <h2 class="section-title">Hours & <em>Location</em></h2>
+      <div class="divider"></div>
+      <table class="hours-table">
+        <tr><td>Monday</td><td>7:00 AM – 8:00 PM</td></tr>
+        <tr><td>Tuesday</td><td>7:00 AM – 8:00 PM</td></tr>
+        <tr><td>Wednesday</td><td>7:00 AM – 8:00 PM</td></tr>
+        <tr><td>Thursday</td><td>7:00 AM – 8:00 PM</td></tr>
+        <tr class="today"><td>Friday</td><td>7:00 AM – 9:00 PM</td></tr>
+        <tr><td>Saturday</td><td>7:00 AM – 9:00 PM</td></tr>
+        <tr><td>Sunday</td><td>8:00 AM – 8:00 PM</td></tr>
+      </table>
+    </div>
+    <div>
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Visit <em>Us</em></h2>
+      <div class="divider"></div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Address</div>
+            <div class="contact-item-value">Denver, Colorado<br>
+              <a href="https://maps.google.com" target="_blank">Get Directions →</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🌐</span>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Website</div>
+            <div class="contact-item-value">
+              <a href="https://lookingoodrestaurant.com" target="_blank">lookingoodrestaurant.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">💰</span>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Price Range</div>
+            <div class="contact-item-value">$10 – $20 per person</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">♿</span>
+          <div class="contact-item-text">
+            <div class="contact-item-label">Accessibility</div>
+            <div class="contact-item-value">Wheelchair accessible entrance & seating available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-inner">
+    <span class="section-label">What People Say</span>
+    <h2 class="section-title">Guest <em>Reviews</em></h2>
+    <div class="divider"></div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">The Mad Greek Waffle is absolutely incredible. Never had anything like it — the combination of Greek flavors with a classic waffle is genius. Will be back every weekend!</p>
+        <div class="review-author">Sarah M.</div>
+        <div class="review-date">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Best breakfast spot in Denver, hands down. The Saganaki was on fire — literally! Great atmosphere, friendly staff, and portions that actually fill you up.</p>
+        <div class="review-author">James R.</div>
+        <div class="review-date">Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">Love this place! The Greek Salad with Gyro is my go-to every visit. Consistently good food at a fair price. The lounge vibe in the evenings is a nice touch too.</p>
+        <div class="review-author">Maria T.</div>
+        <div class="review-date">Google Review</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <p style="color:rgba(245,237,214,0.5); font-size:0.9rem;">4.5 ★ · Based on 2,342 Google reviews</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Lookin Good</div>
+  <p class="footer-tagline">Restaurant & Lounge · Denver, Colorado</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#hours">Hours</a>
+    <a href="#reviews">Reviews</a>
+    <a href="https://lookingoodrestaurant.com" target="_blank">Website</a>
+  </div>
+  <p class="footer-copy">© 2026 Lookin Good Restaurant and Lounge. All rights reserved.</p>
+</footer>
+
+<script>
+function filterMenu(cat) {
+  document.querySelectorAll('.menu-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.cat === cat);
+  });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.animation = 'fadeUp 0.7s ease both';
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.menu-card, .review-card, .contact-item, .feature-item').forEach(el => {
+  el.style.opacity = '0';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
